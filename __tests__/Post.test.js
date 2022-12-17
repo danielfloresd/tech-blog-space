@@ -7,7 +7,7 @@ describe('Post', () => {
         expect(post).toBeInstanceOf(Post);
         expect(post).toHaveProperty('id');
         expect(post).toHaveProperty('title');
-        expect(post).toHaveProperty('post_text');
+        expect(post).toHaveProperty('contents');
         expect(post).toHaveProperty('user_id');
     });
 });
