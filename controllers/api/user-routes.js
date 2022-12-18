@@ -95,7 +95,7 @@ router.delete("/:id", async (req, res) => {
     await userData.destroy();
     res.status(200).json({ message: "User deleted" });
   } catch (err) {
-    console.log(err);
+    console.log("Delete User:", err);
     res.status(500).json(err);
   }
 });
@@ -127,18 +127,22 @@ router.post("/login", async (req, res) => {
       res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
-    console.log(err);
+    console.log("Login:", err);
     res.status(400).json(err);
   }
 });
 // POST logout
-router.post("/logout", (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
+router.post("/logout", async (req, res) => {
+  try {
+    if (req.session.logged_in) {
+      await req.session.destroy();
       res.status(204).json({ message: "You are now logged out!" }).end();
-    });
-  } else {
-    res.status(404).json({ message: "No user is logged in!" }).end();
+    } else {
+      res.status(404).json({ message: "No user is logged in!" }).end();
+    }
+  } catch (err) {
+    console.log("Logout:", err);
+    res.status(500).json(err);
   }
 });
 
