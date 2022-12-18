@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require("../../models");
+const {User, Post, Comment} = require("../../models");
 // const withAuth = require('../../utils/auth');
 
 // GET all users
 router.get("/", async (req, res) => {
   try {
     let userData = await User.findAll({
-      attributes: { exclude: ["password"] },
+      attributes : {exclude : [ "password" ]},
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -18,24 +18,24 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     let userData = await User.findByPk(req.params.id, {
-      attributes: { exclude: ["password"] },
-      include: [
+      attributes : {exclude : [ "password" ]},
+      include : [
         {
-          model: Post,
-          attributes: ["id", "title", "contents", "created_at"],
+          model : Post,
+          attributes : [ "id", "title", "contents", "created_at" ],
         },
         {
-          model: Comment,
-          attributes: ["id", "contents", "created_at"],
-          include: {
-            model: Post,
-            attributes: ["title"],
+          model : Comment,
+          attributes : [ "id", "contents", "created_at" ],
+          include : {
+            model : Post,
+            attributes : [ "title" ],
           },
         },
       ],
     });
     if (!userData) {
-      res.status(404).json({ message: "No user found with this id" });
+      res.status(404).json({message : "No user found with this id"});
       return;
     }
     res.status(200).json(userData);
@@ -64,13 +64,13 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     let userData = await User.update(req.body, {
-      individualHooks: true,
-      where: {
-        id: req.params.id,
+      individualHooks : true,
+      where : {
+        id : req.params.id,
       },
     });
     if (!userData[0]) {
-      res.status(404).json({ message: "No user found with this id" });
+      res.status(404).json({message : "No user found with this id"});
       return;
     }
     let user = await User.findByPk(req.params.id);
@@ -84,16 +84,16 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     let userData = await User.findOne({
-      where: {
-        id: req.params.id,
+      where : {
+        id : req.params.id,
       },
     });
     if (!userData) {
-      res.status(404).json({ message: "No user found with this id" });
+      res.status(404).json({message : "No user found with this id"});
       return;
     }
     await userData.destroy();
-    res.status(200).json({ message: "User deleted" });
+    res.status(200).json({message : "User deleted"});
   } catch (err) {
     console.log("Delete User:", err);
     res.status(500).json(err);
@@ -103,28 +103,26 @@ router.delete("/:id", async (req, res) => {
 // POST login
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({where : {email : req.body.email}});
 
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+      res.status(400).json(
+          {message : "Incorrect email or password, please try again"});
       return;
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+      res.status(400).json(
+          {message : "Incorrect email or password, please try again"});
       return;
     }
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      res.json({ user: userData, message: "You are now logged in!" });
+      res.json({user : userData, message : "You are now logged in!"});
     });
   } catch (err) {
     console.log("Login:", err);
@@ -136,9 +134,9 @@ router.post("/logout", async (req, res) => {
   try {
     if (req.session.logged_in) {
       await req.session.destroy();
-      res.status(204).json({ message: "You are now logged out!" }).end();
+      res.status(204).json({message : "You are now logged out!"}).end();
     } else {
-      res.status(404).json({ message: "No user is logged in!" }).end();
+      res.status(404).json({message : "No user is logged in!"}).end();
     }
   } catch (err) {
     console.log("Logout:", err);
