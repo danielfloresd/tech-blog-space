@@ -1,4 +1,3 @@
-
 var User = require('../models/User');
 
 describe('User', () => {
