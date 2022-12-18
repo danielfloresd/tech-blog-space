@@ -1,19 +1,19 @@
 const router = require("express").Router();
-const {Post, User, Comment} = require("../../models");
+const { Post, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // GET all comments
 router.get("/", async (req, res) => {
   try {
     let commentData = await Comment.findAll({
-      include : [
+      include: [
         {
-          model : User,
-          attributes : [ "name" ],
+          model: User,
+          attributes: ["name"],
         },
         {
-          model : Post,
-          attributes : [ "title" ],
+          model: Post,
+          attributes: ["title"],
         },
       ],
     });
@@ -27,19 +27,19 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     let commentData = await Comment.findByPk(req.params.id, {
-      include : [
+      include: [
         {
-          model : User,
-          attributes : [ "name" ],
+          model: User,
+          attributes: ["name"],
         },
         {
-          model : Post,
-          attributes : [ "title" ],
+          model: Post,
+          attributes: ["title"],
         },
       ],
     });
     if (!commentData) {
-      res.status(404).json({message : "No comment found with this id"});
+      res.status(404).json({ message: "No comment found with this id" });
       return;
     }
     res.status(200).json(commentData);
@@ -52,9 +52,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", withAuth, async (req, res) => {
   try {
     let commentData = await Comment.create({
-      contents : req.body.contents,
-      user_id : req.session.user_id,
-      post_id : req.body.post_id,
+      contents: req.body.contents,
+      user_id: req.session.user_id,
+      post_id: req.body.post_id,
     });
     res.status(200).json(commentData);
   } catch (err) {
@@ -66,16 +66,16 @@ router.post("/", withAuth, async (req, res) => {
 router.delete("/:id", withAuth, async (req, res) => {
   try {
     let commentData = await Comment.findOne({
-      where : {
-        id : req.params.id,
+      where: {
+        id: req.params.id,
       },
     });
     if (!commentData) {
-      res.status(404).json({message : "No comment found with this id"});
+      res.status(404).json({ message: "No comment found with this id" });
       return;
     }
     commentData.destroy();
-    res.status(200).json({message : "Comment deleted"});
+    res.status(200).json({ message: "Comment deleted" });
   } catch (err) {
     res.status(500).json(err);
   }
