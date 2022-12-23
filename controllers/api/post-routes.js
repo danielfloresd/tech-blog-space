@@ -58,7 +58,9 @@ router.post("/", withAuth, async (req, res) => {
       user_id: req.session.user_id,
     });
     res.status(200).json(postData);
-  } catch (err) {
+  } catch (err) 
+  {
+    console.log(err);
     res.status(400).json(err);
   }
 });

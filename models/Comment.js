@@ -32,7 +32,7 @@ Comment.init(
         },
 
         contents: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT("long"),
             allowNull: false,
             validate: {
                 len: [1]
