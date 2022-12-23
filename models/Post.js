@@ -1,9 +1,35 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/connection');
 const User = require('./User');
+const Comment = require('./Comment');
 
 // Create our Post model
-class Post extends Model {}
+class Post extends Model {
+    
+    static postAttributes = [
+        'id',
+        'category',
+        'contents',
+        'title', 
+        'created_at'
+    ];
+
+    static postInclude = [
+        { 
+            model: Comment,
+            attributes: Comment.commentAttributes,
+            include: {
+                model: User,
+                attributes: ['username']
+            },
+            order: [['created_at', 'DESC']]
+        },
+        {
+            model: User,
+            attributes: ['username', 'id']
+        }
+    ];
+}
 
 // define table columns and configuration
 Post.init(
@@ -13,6 +39,11 @@ Post.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
+        },
+        category: {
+            type: Sequelize.ENUM('Software', 'Hardware', 'Media & Entertainment', 'Mobile', 'Gaming', 'Product Reviews', 'Other'),
+            defaultValue: 'Other',
+            allowNull: false,
         },
         title: {
             type: DataTypes.STRING,

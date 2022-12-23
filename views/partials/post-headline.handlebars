@@ -1,0 +1,13 @@
+<div class="card-header {{bgcolor}} py-1">
+    <a href="/post/{{id}}" class=" btn btn-block {{bgcolor}} font-weight-bold
+        text-left {{textcolor}} px-0 mx-0">
+        <b>👾{{user.username}}</b> - {{title}}
+    </a>
+    <p class="float-left text-info" style="font-size:x-small">
+        <i class="fas fa-tag"></i>
+        {{category}}
+        <span class="float-right">
+            {{ formatDate created_at }}
+        </span>
+    </p>
+</div>

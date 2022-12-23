@@ -6,7 +6,7 @@ describe('User', () => {
         expect(user).toBeDefined();
         expect(user).toBeInstanceOf(User);
         expect(user).toHaveProperty('id');
-        expect(user).toHaveProperty('name');
+        expect(user).toHaveProperty('username');
         expect(user).toHaveProperty('email');
         expect(user).toHaveProperty('password');
     });

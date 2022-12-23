@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
       include: [
         {
           model: Post,
-          attributes: ["id", "title", "contents", "created_at"],
+          attributes: Post.postAttributes,
         },
         {
           model: Comment,
@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.username = userData.username;
       req.session.email = userData.email;
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -123,6 +123,7 @@ router.post("/login", async (req, res) => {
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.username = userData.username;
       req.session.logged_in = true;
       res.json({ user: userData, message: "You are now logged in!" });
     });

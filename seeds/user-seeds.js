@@ -1,24 +1,59 @@
-const sequelize = require("../config/connection");
-const User = require("../models/User");
+const sequelize = require('../config/connection');
+const { User, Post } = require('../models');
 
-const userData = [
-    {
-        "name": "Sal",
-        "email": "sal@hotmail.com",
-        "password": "password12345"
-    },
-    {
-        "name": "Lernantino",
-        "email": "lernantino@gmail.com",
-        "password": "password12345"
-    },
-    {
-        "name": "Amiko",
-        "email": "amiko2k20@aol.com",
-        "password": "password12345"
-    }
+const userdata = [
+  {
+    username: 'BobB',
+    email: 'bc@uofa.edu',
+    password: 'password12345'
+  },
+  {
+    username: 'Alice',
+    email: 'a@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Bert',
+    email: 'b@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Carlos',
+    email: 'c@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'David',
+    email: 'd@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Esther',
+    email: 'e@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Fred',
+    email: 'f@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Gina',
+    email: 'g@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Hank',
+    email: 'h@blogspace.com',
+    password: 'password12345'
+  },
+  {
+    username: 'Irene',
+    email: 'i@blogspace.com',
+    password: 'password12345'
+  }
 ];
 
-const seedUsers = () => User.bulkCreate(userData, { individualHooks: true });
+const seedUsers = () => User.bulkCreate(userdata, {individualHooks: true});
 
 module.exports = seedUsers;

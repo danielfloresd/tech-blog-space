@@ -3,9 +3,14 @@ const request = require('supertest');
 const app = require('../app');
 // const seedUsers = require('../seeds/user-seeds');
 
-// beforeAll( () => {
-//     return seedUsers();
-// });
+beforeAll( () => {
+    // return seedUsers();
+    console.log("beforeAll - Setup Database");
+});
+
+afterAll( () => {
+    console.log("afterAll - Teardown Database");
+});
 
 describe('GET /api/users', () => {
 
@@ -35,7 +40,7 @@ describe('GET /api/users', () => {
             .then(response => {
                 expect(response.body).toBeDefined();
                 expect(response.body).toHaveProperty('id');
-                expect(response.body).toHaveProperty('name');
+                expect(response.body).toHaveProperty('username');
                 expect(response.body).toHaveProperty('email');
             });
     });
@@ -53,7 +58,7 @@ describe('GET /api/users', () => {
             .then(response => {
                 expect(response.body).toBeDefined();
                 expect(response.body).toHaveProperty('id');
-                expect(response.body).toHaveProperty('name');
+                expect(response.body).toHaveProperty('username');
                 expect(response.body).toHaveProperty('email');
             }   
             );
@@ -101,7 +106,7 @@ describe('GET /api/users', () => {
 
                 expect(response.body).toBeDefined();
                 expect(response.body).toHaveProperty('id');
-                expect(response.body).toHaveProperty('name');
+                expect(response.body).toHaveProperty('username');
                 expect(response.body).toHaveProperty('email');
                 expect(response.body).toHaveProperty('password');
             }

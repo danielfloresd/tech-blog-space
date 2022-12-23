@@ -1,0 +1,11 @@
+<div class="card">
+    {{#if allow_edit}}
+    {{> comment bgcolor="bg-primary" textcolor="text-white"}}
+    {{else}}
+    {{> comment bgcolor="bg-dark" textcolor="text-white"}}
+    {{/if}}
+    <p class="float-right" style="font-size:smaller">
+        {{ formatDate created_at }}
+    </p>
+    <p class="card-text px-5 py-1">{{contents}}</p>
+</div>

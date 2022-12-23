@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["name"],
+          attributes: ["username"],
         },
         {
           model: Comment,
@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["name"],
+          attributes: ["username"],
         },
         {
           model: Comment,
@@ -54,6 +54,7 @@ router.post("/", withAuth, async (req, res) => {
     let postData = await Post.create({
       title: req.body.title,
       contents: req.body.contents,
+      category : req.body.category,
       user_id: req.session.user_id,
     });
     res.status(200).json(postData);
@@ -69,6 +70,7 @@ router.put("/:id", withAuth, async (req, res) => {
       {
         title: req.body.title,
         contents: req.body.contents,
+        category : req.body.category,
       },
       {
         where: {
