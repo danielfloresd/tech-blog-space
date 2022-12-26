@@ -3,7 +3,6 @@
         Dashboard
     </h3>
 </div>
-<br></br>
 {{#if newPost}}
 <div class="card mx-3 my-3">
     <div class="card-header bg-primary mb-0">
@@ -47,7 +46,7 @@
     </form>
 </div>
 {{else}}
-
+<br></br>
 <div class="row">
     <div class="card">
         <h4 class="card-header bg-primary text-center text-white border-bottom-0">
@@ -74,15 +73,6 @@
     </div>
     {{/each}}
 </div>
-{{#if editPost}}
-
-{{else}}
-{{!-- <div class="col text-center mb-4">
-    <a href="/dashboard/new-post" class="btn btn-info">+ New Post</a>
-</div> --}}
-{{/if}}
-
-<br></br>
 <div class="row">
     <div class="card">
         <h4 class="card-header bg-secondary text-center

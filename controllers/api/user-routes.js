@@ -3,16 +3,16 @@ const { User, Post, Comment } = require("../../models");
 // const withAuth = require('../../utils/auth');
 
 // GET all users
-router.get("/", async (req, res) => {
-  try {
-    let userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     let userData = await User.findAll({
+//       attributes: { exclude: ["password"] },
+//     });
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // GET a single user
 router.get("/:id", async (req, res) => {
@@ -56,6 +56,7 @@ router.post("/", async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
+    console.log("Create User:", err);
     res.status(400).json(err);
   }
 });
