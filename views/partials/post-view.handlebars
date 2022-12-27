@@ -1,10 +1,10 @@
-<div class="card">
-    {{#if allow_edit}}
-    {{> post-headline bgcolor="bg-primary" textcolor="text-white"}}
-    {{else}}
-    {{> post-headline bgcolor="bg-dark" textcolor="text-white"}}
-    {{/if}}
+<div class="card border-primary">
     <div class="card-body">
+        {{#if allow_edit}}
+        {{> post-headline bgcolor="bg-primary" textcolor="text-white"}}
+        {{else}}
+        {{> post-headline bgcolor="bg-dark" textcolor="text-white"}}
+        {{/if}}
         <p class="card-text px-5 py-1">{{contents}}</p>
     </div>
 </div>
