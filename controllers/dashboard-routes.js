@@ -24,7 +24,7 @@ router.get("/", withAuth, (req, res) => {
           user_id: req.session.user_id,
         },
         attributes: Comment.commentAttributes,
-        include: Comment.commentIncludeUser,
+        include: [{ model: User, attributes: ["username"] }, {model: Post}],
         order: [["created_at", "DESC"]],
       }).then((dbData) => {
         const comments = dbData.map((comment) => comment.get({ plain: true }));

@@ -14,10 +14,14 @@ class Comment extends Model {
         'created_at'
     ];
 
-    static commentIncludeUser = [
+    static commentInclude = [
         {
             model: User,
             attributes: ['username', 'id']
+        },
+        {
+            model: Post,
+            attributes: ['title', 'id']
         }
     ];
 }

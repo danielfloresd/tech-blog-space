@@ -1,6 +1,8 @@
 <div class="card">
     <h3 class="card-header bg-primary text-center text-white border-bottom-0">
+        <i class="fas fa-rss"></i>
         Post with Comments
+        <i class="fas fa-comments"></i>
     </h3>
 </div>
 
@@ -9,6 +11,7 @@
 {{#if logged_in}}
 <div class="card">
     <div class="card-header bg-primary mb-0 text-white">
+        <i class="fas fa-comment"></i>
         Comment
     </div>
     <form class="new-comment-form card-body" id="new-comment-form">
@@ -21,7 +24,10 @@
 {{/if}}
 <br></br>
     <div class="card">
-        <h3 class="card-header bg-secondary text-center border-bottom-0">Comments</h3>
+        <h3 class="card-header bg-secondary text-center border-bottom-0">
+            <i class="fas fa-comments"></i>
+            Comments
+        </h3>
         <ul class="list-group list-unstyled">
             {{#each post.comments as |comment|}}
             <li class="">

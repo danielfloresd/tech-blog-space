@@ -1,5 +1,6 @@
 <div class="card">
     <h3 class="card-header bg-info text-center text-white border-bottom-0">
+        <i class="fas fa-tachometer-alt"></i>
         Dashboard
     </h3>
 </div>
@@ -48,19 +49,20 @@
 {{else}}
 <br></br>
 <div class="row">
-    <div class="card">
-        <h4 class="card-header bg-primary text-center text-white border-bottom-0">
+    <div class="card border-primary">
+        <h4 class="card-header bg-primary text-center text-white">
+            <i class="fas fa-rss"></i>
             Posts
         </h4>
     </div>
     {{#each posts as |post|}}
-    <div class="card">
+    <div class="card border-primary">
         <div class="card-header bg-primary">
             <a href="/dashboard/edit/{{post.id}}" class="btn btn-primary
                 btn-block">
                 {{title}}
             </a>
-            <p>
+            <p class="text-info" style="font-size:smaller">
                 <i class="fas fa-tag"></i> {{category}}
             </p>
         </div>
@@ -74,14 +76,15 @@
     {{/each}}
 </div>
 <div class="row">
-    <div class="card">
-        <h4 class="card-header bg-secondary text-center
-            border-bottom-0">
+    <div class="card border-secondary">
+        <h4 class="card-header bg-secondary text-center">
+            <i class="fas fa-comments"></i>
             Comments
         </h4>
     </div>
     {{#each comments as |comment|}}
-    <div class="card">
+    <div class="card border-secondary">
+        <div class="card-body">
         <div class="card-header bg-secondary">
             <a href="/post/{{post_id}}" class=" btn btn-block bg-secondary
                 font-weight-bold
@@ -89,9 +92,14 @@
                 {{contents}}
             </a>
         </div>
-        <p class="float-right" style="font-size:smaller">
-            {{ formatDate created_at }}
+        <p disabled class="card-text">
+            <i class="fas fa-rss"></i>
+            {{comment.post.title}}
+            <span class="float-right" style="font-size:smaller">
+                {{ formatDate created_at }}
+            </span>
         </p>
+        </div>
     </div>
     {{/each}}
 </div>
